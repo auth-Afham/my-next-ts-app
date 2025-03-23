@@ -250,7 +250,7 @@ const ThreeDCanvas: React.FC = () => {
       { id: 4, image: "/static-image-4.jpg", title: "Expert-Level" },
     ]);
   }, []);
-  
+
   // const carouselItems = [
   //   {
   //     id: 1,
