@@ -2,25 +2,6 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-// import Link from "next/link";
-// import { Canvas, useThree } from "@react-three/fiber";
-// import { OrbitControls, TransformControls, Plane } from "@react-three/drei";
-// import * as THREE from "three";
-// import {
-//   FaComments,
-//   FaCog,
-//   FaHome,
-//   FaTimes,
-//   FaCube,
-//   FaSearch,
-//   FaInfoCircle,
-//   FaCrosshairs,
-//   FaThumbsUp,
-//   FaHeart,
-//   FaFire,
-//   FaUsers,
-//   FaFileAlt,
-// } from "react-icons/fa";
 
 // Carousel Component
 const Carousel: React.FC<{

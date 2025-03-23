@@ -1,26 +1,9 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-// import Image from "next/image";
-// import Link from "next/link";
 import { useThree } from "@react-three/fiber";
 import { OrbitControls, TransformControls, Plane } from "@react-three/drei";
 import * as THREE from "three";
-// import {
-//   FaComments,
-//   FaCog,
-//   FaHome,
-//   FaTimes,
-//   FaCube,
-//   FaSearch,
-//   FaInfoCircle,
-//   FaCrosshairs,
-//   FaThumbsUp,
-//   FaHeart,
-//   FaFire,
-//   FaUsers,
-//   FaFileAlt,
-// } from "react-icons/fa";
 import Shape from "./Shape";
 
 // Define Object Types
@@ -49,14 +32,14 @@ const SceneContent: React.FC<SceneProps> = ({
   const { camera, gl } = useThree();
   const [transformRef, setTransformRef] = useState<THREE.Object3D | null>(null);
   const [isInteracting, setIsInteracting] = useState(false); // Track interaction
+  const [isDragging, setIsDragging] = useState(false); // Track if orbit controls is dragging
   const planeRef = useRef<THREE.Mesh>(null);
 
   // Adjust the ground plane size to match pixel art units (e.g., 32x32 pixels)
-  const planeSize = 32; // You can change this value to match your pixel size (e.g., 32 for 32x32)
+  const planeSize = 8; // You can change this value to match your pixel size (e.g., 32 for 32x32)
 
   const handleGroundClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // console.log(selectedObject);
 
     // If interacting with a selected object, deselect it
     if (isInteracting && selectedObject !== null) {
@@ -65,8 +48,8 @@ const SceneContent: React.FC<SceneProps> = ({
       return;
     }
 
-    // Allow adding objects only when not interacting with any selected object
-    if (isInteracting) return;
+    // Don't allow adding shapes if OrbitControls is dragging
+    if (isDragging || isInteracting) return;
 
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
