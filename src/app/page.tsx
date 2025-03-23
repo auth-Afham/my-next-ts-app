@@ -36,6 +36,12 @@ interface ShapeProps extends ObjectProps {
   isSelected: boolean;
 }
 
+declare global {
+  interface Window {
+    selectedMesh?: THREE.Mesh;
+  }
+}
+
 // Shape Component
 const Shape: React.FC<ShapeProps> = ({
   id,
@@ -48,7 +54,7 @@ const Shape: React.FC<ShapeProps> = ({
 
   useEffect(() => {
     if (isSelected && ref.current) {
-      (window as any).selectedMesh = ref.current;
+      window.selectedMesh = ref.current; // Set the selected mesh on window
     }
   }, [isSelected]);
 
@@ -115,7 +121,7 @@ const SceneContent: React.FC<SceneProps> = ({
     }
   };
 
-  const handlePointerDown = (e: any) => {
+  const handlePointerDown = () => {
     if (selectedObject !== null) {
       // Interaction with the selected object only
       setIsInteracting(true); // Interaction started
@@ -127,10 +133,10 @@ const SceneContent: React.FC<SceneProps> = ({
   };
 
   useEffect(() => {
-    if (selectedObject !== null && (window as any).selectedMesh) {
-      setTransformRef((window as any).selectedMesh);
+    if (selectedObject !== null && window.selectedMesh) {
+      setTransformRef(window.selectedMesh); // Set the transform reference
     } else {
-      setTransformRef(null);
+      setTransformRef(null); // Clear the transform reference if no object is selected
     }
   }, [selectedObject, objects]);
 

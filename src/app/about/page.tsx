@@ -29,7 +29,7 @@ export default function About() {
 
         {/* Description */}
         <p className="text-lg text-gray-700 mt-2 max-w-lg text-center">
-          Hi, I'm <span className="font-semibold">Arfan Farish</span>, a
+          Hi, I&apos;m <span className="font-semibold">Arfan Farish</span>, a
           passionate
           <span className="text-blue-600 font-medium">
             {" "}
