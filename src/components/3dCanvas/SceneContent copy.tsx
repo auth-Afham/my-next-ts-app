@@ -58,8 +58,6 @@ const SceneContent: React.FC<SceneProps> = ({
 
     raycaster.setFromCamera(mouse, camera);
 
-    // console.log(mouse)
-
     if (planeRef.current) {
       const intersects = raycaster.intersectObject(planeRef.current);
       if (intersects.length > 0) {

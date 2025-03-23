@@ -85,13 +85,25 @@ const ThreeDCanvas: React.FC = () => {
         </Canvas>
       </div>
 
-      {/* Left Side Overlay - Title */}
+      {/* Left Side Overlay */}
       <div
-        className="absolute top-5 left-5 bg-gray-800 px-4 py-2 rounded-lg flex items-center space-x-3"
+        className="absolute top-5 left-5   flex flex-col items-start space-y-3"
         style={{ zIndex: 10 }}
       >
-        <FaCube className="text-white text-2xl" />
-        <h2 className="text-lg font-semibold">3D Model Viewer</h2>
+        {/* Title Section */}
+        <div className="flex items-center space-x-3 bg-gray-800 px-4 py-2 rounded-lg">
+          <FaCube className="text-white text-2xl" />
+          <h2 className="text-lg font-semibold">3D Model Viewer</h2>
+        </div>
+
+        {/* Live Viewers Info Section */}
+        <div
+          className="flex items-center bg-gray-700 px-4 py-2 rounded-lg text-white"
+          style={{ zIndex: 20 }}
+        >
+          <FaUsers className="text-green-400 mr-2" />
+          <span>{viewers} Live Viewers</span>
+        </div>
       </div>
 
       {/* Right Sidebar Overlay */}
@@ -127,9 +139,9 @@ const ThreeDCanvas: React.FC = () => {
           </div>
 
           {/* Decorative Circles Below */}
-          <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex gap-4">
+          <div className="absolute -bottom-16 right-5 flex gap-4">
             <Link href="/contact" passHref>
-              <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center">
                 <FaComments className="text-white text-md" />
               </div>
             </Link>
@@ -139,7 +151,7 @@ const ThreeDCanvas: React.FC = () => {
               </div>
             </Link>
             <Link href="/about" passHref>
-              <div className="w-9 h-9 bg-gray-500 rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-gray-500 rounded-full flex items-center justify-center">
                 <FaCog className="text-white text-md" />
               </div>
             </Link>
@@ -209,19 +221,10 @@ const ThreeDCanvas: React.FC = () => {
             <span className="text-white">{reactions.fire}</span>
           </div>
         </div>
-
-        {/* Live Viewers Info */}
-        <div
-          className=" top-5 right-5 flex items-center bg-gray-700 px-4 py-2 rounded-lg text-white"
-          style={{ zIndex: 20 }}
-        >
-          <FaUsers className="text-green-400 mr-2" />
-          <span>{viewers} Live Viewers</span>
-        </div>
       </div>
 
       {/* Bottom Buttons */}
-      <div
+      {/* <div
         className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex gap-4"
         style={{ zIndex: 20 }}
       >
@@ -234,7 +237,7 @@ const ThreeDCanvas: React.FC = () => {
         <div className="w-9 h-9 bg-gray-500 rounded-full flex items-center justify-center">
           <FaCog className="text-white text-md" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
