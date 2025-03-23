@@ -43,8 +43,8 @@ export default function About() {
         </p>
 
         <p className="text-lg text-gray-700 mt-4 max-w-lg text-center">
-          Welcome to <span className="font-semibold">Raikou Search Engine</span>, a
-          next-gen
+          Welcome to <span className="font-semibold">Raikou Search Engine</span>
+          , a next-gen
           <span className="text-blue-600 font-medium">
             {" "}
             3D sandbox search engine

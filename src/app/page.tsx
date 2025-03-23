@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, TransformControls, Plane } from "@react-three/drei";
@@ -75,7 +76,7 @@ interface SceneProps {
   addObject: (point: THREE.Vector3) => void;
   objects: ObjectProps[];
   selectedObject: number | null;
-  setSelectedObject: React.Dispatch<React.SetStateAction<number | null>>;  // Specify the type for the setter
+  setSelectedObject: React.Dispatch<React.SetStateAction<number | null>>; // Specify the type for the setter
 }
 
 const SceneContent: React.FC<SceneProps> = ({
@@ -89,9 +90,9 @@ const SceneContent: React.FC<SceneProps> = ({
   const [isInteracting, setIsInteracting] = useState(false); // Track interaction
   const planeRef = useRef<THREE.Mesh>(null);
 
-  const handleGroundClick = (e: any) => {
+  const handleGroundClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    console.log(isInteracting);
+    // console.log(isInteracting);
 
     // Allow adding objects only when not interacting with any selected object
     if (isInteracting) return;
@@ -155,7 +156,9 @@ const SceneContent: React.FC<SceneProps> = ({
           {...obj}
           onSelect={(id) => {
             // Toggle selection by checking if the clicked object is already selected
-            setSelectedObject(prevSelected => (prevSelected === id ? null : id));
+            setSelectedObject((prevSelected) =>
+              prevSelected === id ? null : id,
+            );
           }}
           isSelected={selectedObject === obj.id}
         />
@@ -196,10 +199,11 @@ const Carousel: React.FC<{
               className="relative w-48 h-48 cursor-pointer"
               onClick={() => onSelectLevel(items[currentIndex]?.id)} // Safe check with ?
             >
-              <img
-                src={items[currentIndex]?.image || "/fallback-image.jpg"} // Use a fallback image
+              <Image
+                src={items[currentIndex]?.image || "/fallback-image.jpg"}
                 alt={`Item ${currentIndex + 1}`}
-                className="w-full h-full object-contain"
+                width={500}
+                height={500}
               />
             </div>
           )}
@@ -322,7 +326,7 @@ const ThreeDCanvas: React.FC = () => {
     fire: 3,
   });
   const [viewers, setViewers] = useState(0); // Initialize with 0
-  const [modelTitle] = useState("3D Rotating Cube");
+  // const [modelTitle] = useState("3D Rotating Cube");
 
   // Define static carousel items with fixed titles
   const [carouselItems, setCarouselItems] = useState<
@@ -374,15 +378,15 @@ const ThreeDCanvas: React.FC = () => {
         <h2 className="text-lg font-semibold">3D Model Viewer</h2>
       </div>
 
-    {/* Right Sidebar Overlay */}
-    <div
-      className="absolute top-0 right-0 h-5/6 my-10 mb-20 rounded-l-xl  flex flex-col"
-      style={{
-        width: "33.33%",
-        boxSizing: "border-box",
-        zIndex: 10, // Ensure the sidebar is above the canvas
-      }}
-    >
+      {/* Right Sidebar Overlay */}
+      <div
+        className="absolute top-0 right-0 h-5/6 my-10 mb-20 rounded-l-xl  flex flex-col"
+        style={{
+          width: "33.33%",
+          boxSizing: "border-box",
+          zIndex: 10, // Ensure the sidebar is above the canvas
+        }}
+      >
         <header className="bg-gray-800 p-4 rounded-tl-xl flex items-center justify-between">
           <div></div>
           <button className="text-white text-lg cursor-pointer">
