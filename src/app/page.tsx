@@ -390,7 +390,7 @@ const ThreeDCanvas: React.FC = () => {
           </button>
         </header>
 
-        <div className="flex w-full h-full bg-gray-900 rounded-xl">
+        <div className="flex w-full h-full bg-gray-900 rounded-bl-xl">
           {/* Conditional rendering for Carousel or Topics */}
           <div className="flex w-full h-full">
             {selectedLevel === null ? (
