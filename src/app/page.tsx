@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
 import {
   FaComments,
-  FaCog,
-  FaHome,
+  // FaCog,
+  // FaHome,
   FaTimes,
   FaCube,
   FaSearch,
@@ -17,6 +17,7 @@ import {
   FaHeart,
   FaFire,
   FaUsers,
+  FaSignInAlt, // Login icon
 } from "react-icons/fa";
 
 import SceneContent, {
@@ -43,6 +44,18 @@ const ThreeDCanvas: React.FC = () => {
     fire: 3,
   });
   const [viewers, setViewers] = useState(0); // Initialize with 0
+
+  // Login state
+  const [loggedIn, setLoggedIn] = useState(false); // You can manage this dynamically
+  const [username, setUsername] = useState<string | null>(null); // Fake username
+
+  // UseEffect for client-side only logic
+  useEffect(() => {
+    // Here you can set loggedIn dynamically or based on session data
+    setLoggedIn(true); // or false based on login state
+    setUsername("JohnDoe"); // Set fake username or fetch from session
+    setViewers(Math.floor(Math.random() * 100) + 1);
+  }, []); // Runs only on the client
 
   // Define static carousel items with fixed titles
   const [carouselItems, setCarouselItems] = useState<
@@ -137,27 +150,39 @@ const ThreeDCanvas: React.FC = () => {
               />
             )}
           </div>
-
-          {/* Decorative Circles Below */}
-          <div className="absolute -bottom-16 right-5 flex gap-4">
-            <Link href="/contact" passHref>
-              <div className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center">
-                <FaComments className="text-white text-md" />
-              </div>
-            </Link>
-            <Link href="/home" passHref>
-              <div className="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center cursor-pointer">
-                <FaHome className="text-white text-lg" />
-              </div>
-            </Link>
-            <Link href="/about" passHref>
-              <div className="w-12 h-12 bg-gray-500 rounded-full flex items-center justify-center">
-                <FaCog className="text-white text-md" />
-              </div>
-            </Link>
-          </div>
         </div>
       </div>
+
+      {/* Decorative Circles Below */}
+      <div className="absolute bottom-4 right-5 flex items-center gap-4">
+        <Link href="/contact" passHref>
+          <div className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center">
+            <FaComments className="text-white text-md" />
+          </div>
+        </Link>
+        {/* Conditional rendering of Login / User */}
+        <Link href={loggedIn ? "/profile" : "/login"} passHref>
+          <div className="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center cursor-pointer">
+            {loggedIn ? (
+              <span className="text-white text-lg">
+                {username?.slice(0, 2).toUpperCase() ?? "GU"}
+              </span>
+            ) : (
+              <FaSignInAlt className="text-white text-lg" />
+            )}
+          </div>
+        </Link>
+        <Link href="/about" passHref>
+          <div className="w-32 h-12 bg-gray-500 rounded-lg flex items-center justify-center">
+            <img
+              src="/path/to/your/logo.png"
+              alt="Company Logo"
+              className="w-12 h-6 object-contain"
+            />
+          </div>
+        </Link>
+      </div>
+
       {/* 🔍 Search Engine with Reactions */}
       <div
         className="absolute bottom-4 flex items-center space-x-4"
@@ -222,22 +247,6 @@ const ThreeDCanvas: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Bottom Buttons */}
-      {/* <div
-        className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex gap-4"
-        style={{ zIndex: 20 }}
-      >
-        <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center">
-          <FaComments className="text-white text-md" />
-        </div>
-        <div className="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center cursor-pointer">
-          <FaHome className="text-white text-lg" />
-        </div>
-        <div className="w-9 h-9 bg-gray-500 rounded-full flex items-center justify-center">
-          <FaCog className="text-white text-md" />
-        </div>
-      </div> */}
     </div>
   );
 };
