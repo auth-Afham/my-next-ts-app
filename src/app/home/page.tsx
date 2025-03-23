@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Scene from "@/components/Scene";
+import Scene from "@/components/home/Scene";
 import Navbar from "@/components/Navbar";
 
 export default function Home() {
