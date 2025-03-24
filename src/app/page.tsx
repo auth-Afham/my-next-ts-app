@@ -55,7 +55,7 @@ const ThreeDCanvas: React.FC = () => {
   useEffect(() => {
     setIsDrawingToolsVisible(!isCarouselVisible);
   }, [isCarouselVisible]);
-  
+
   // UseEffect for client-side only logic
   useEffect(() => {
     // Here you can set loggedIn dynamically or based on session data
@@ -123,70 +123,76 @@ const ThreeDCanvas: React.FC = () => {
 
       {/* Right Sidebar Overlay */}
       {isCarouselVisible && (
-      <div
-        className="absolute top-0 right-0 h-5/6 my-10 mb-20 rounded-l-xl  flex flex-col"
-        style={{
-          width: "33.33%",
-          boxSizing: "border-box",
-          zIndex: 10, // Ensure the sidebar is above the canvas
-        }}
-      >
-<header className="bg-gray-800 p-4 rounded-tl-xl flex items-center justify-between">
-  <div className="flex-grow"></div> {/* Pushes the button to the right */}
-  <button
-    className="text-white text-lg cursor-pointer ml-auto"
-    onClick={() => {
-      setIsCarouselVisible(false);
-      setIsDrawingToolsVisible(true);
-    }}
-      >
-    <FaTimes />
-  </button>
-</header>
-        <div className="flex w-full h-full bg-gray-900 rounded-bl-xl">
-          {/* Conditional rendering for Carousel or Topics */}
-          <div className="flex w-full h-full">
-            {selectedLevel === null ? (
-              <Carousel
-                items={carouselItems}
-                onSelectLevel={(levelId) => setSelectedLevel(levelId)}
-              />
-            ) : (
-              <Topics
-                levelId={selectedLevel}
-                onBack={() => setSelectedLevel(null)}
-              />
-            )}
-          </div>
-        </div>
-      </div>
-      )}
-
-{isDrawingToolsVisible && (
-    <div
-      className="absolute top-0 right-0 h-fit my-10 mb-20 rounded-l-xl flex flex-col bg-gray-800 p-4"
-      style={{ width: "10%", zIndex: 10 }}
-    >
-      <header className="flex items-center justify-between">
-        <div className="flex-grow"></div>
-        <button
-          className="text-white text-lg cursor-pointer ml-auto"
-          onClick={() => {
-            setIsDrawingToolsVisible(false);
-            setIsCarouselVisible(true);
+        <div
+          className="absolute top-0 right-0 h-5/6 my-10 mb-20 rounded-l-xl  flex flex-col"
+          style={{
+            width: "33.33%",
+            boxSizing: "border-box",
+            zIndex: 10, // Ensure the sidebar is above the canvas
           }}
         >
-          <FaTimes />
-        </button>
-      </header>
-      <div className="flex flex-col space-y-3 mt-4">
-        <button className="text-white bg-gray-700 p-2 rounded">✏️ Draw</button>
-        <button className="text-white bg-gray-700 p-2 rounded">🖌️ Brush</button>
-        <button className="text-white bg-gray-700 p-2 rounded">✂️ Erase</button>
-      </div>
-    </div>
-  )}
+          <header className="bg-gray-800 p-4 rounded-tl-xl flex items-center justify-between">
+            <div className="flex-grow"></div>{" "}
+            {/* Pushes the button to the right */}
+            <button
+              className="text-white text-lg cursor-pointer ml-auto"
+              onClick={() => {
+                setIsCarouselVisible(false);
+                setIsDrawingToolsVisible(true);
+              }}
+            >
+              <FaTimes />
+            </button>
+          </header>
+          <div className="flex w-full h-full bg-gray-900 rounded-bl-xl">
+            {/* Conditional rendering for Carousel or Topics */}
+            <div className="flex w-full h-full">
+              {selectedLevel === null ? (
+                <Carousel
+                  items={carouselItems}
+                  onSelectLevel={(levelId) => setSelectedLevel(levelId)}
+                />
+              ) : (
+                <Topics
+                  levelId={selectedLevel}
+                  onBack={() => setSelectedLevel(null)}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
+      {isDrawingToolsVisible && (
+        <div
+          className="absolute top-0 right-0 h-fit my-10 mb-20 rounded-l-xl flex flex-col bg-gray-800 p-4"
+          style={{ width: "10%", zIndex: 10 }}
+        >
+          <header className="flex items-center justify-between">
+            <div className="flex-grow"></div>
+            <button
+              className="text-white text-lg cursor-pointer ml-auto"
+              onClick={() => {
+                setIsDrawingToolsVisible(false);
+                setIsCarouselVisible(true);
+              }}
+            >
+              <FaTimes />
+            </button>
+          </header>
+          <div className="flex flex-col space-y-3 mt-4">
+            <button className="text-white bg-gray-700 p-2 rounded">
+              ✏️ Draw
+            </button>
+            <button className="text-white bg-gray-700 p-2 rounded">
+              🖌️ Brush
+            </button>
+            <button className="text-white bg-gray-700 p-2 rounded">
+              ✂️ Erase
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Decorative Circles Below */}
       <div className="absolute bottom-4 right-5 flex items-center gap-4">
@@ -241,13 +247,13 @@ const ThreeDCanvas: React.FC = () => {
           />
 
           {/* Info Button */}
-{/* Info Button */}
-<button
-  className="text-white hover:text-gray-400"
-  onClick={() => setIsCarouselVisible((prev) => !prev)} // Toggles instead of always opening
->
-  <FaInfoCircle />
-</button>
+          {/* Info Button */}
+          <button
+            className="text-white hover:text-gray-400"
+            onClick={() => setIsCarouselVisible((prev) => !prev)} // Toggles instead of always opening
+          >
+            <FaInfoCircle />
+          </button>
 
           {/* Center Button */}
           <button className="text-white hover:text-gray-400">
